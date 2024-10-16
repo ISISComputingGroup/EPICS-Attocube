@@ -1,0 +1,45 @@
+ReadTimeout = 100;
+OutTerminator = "\r\n";
+InTerminator = "\r\n:";
+
+get_angle {
+    out "ATANGLE=";
+    in "%f";
+}
+
+set_angle {
+    out "ATTO=%f";
+	out "ATGO=1";
+}
+
+get_ark {
+    out "Y=";
+    in "%f";
+}
+
+set_ark {
+    out "ARK=%f";
+	out "ARGO=1";
+}
+
+initialise {
+	out "VERBOSE=0";
+	out "AB0";
+	out "MO";
+	out "XQ #SXD";
+	out "MG \"stop 1\" {P2}";
+}
+
+stop {
+	out "AB0";
+	out "MO";
+	out "XQ #SXD";
+	out "MG \"stop 1\" {P2}";
+}
+
+get_busy {
+    ExtraInput = Ignore;
+	out "BUSY=";
+    in "%1i";
+}
+

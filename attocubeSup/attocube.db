@@ -1,0 +1,131 @@
+record(bo, "$(P)SIM")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
+    field(VAL, "$(RECSIM=0)")
+    field(PINI, "YES")
+}
+
+record(bo, "$(P)DISABLE")
+{
+    field(DESC, "Disable comms")
+    field(PINI, "YES")
+    field(VAL, "$(DISABLE=0)")
+    field(OMSL, "supervisory")
+    field(ZNAM, "COMMS ENABLED")
+    field(ONAM, "COMMS DISABLED")
+}
+
+record(ai, "$(P)ANGLE")
+{
+    field(DESC, "Angle")
+    field(EGU, "deg")
+	field(PREC, "2")	
+	field(SCAN, "1 second")
+	field(DTYP, "stream")
+	field(INP, "@attocube.proto get_angle $(PORT)")
+	field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:ANGLE")
+	field(SDIS, "$(P)DISABLE")
+	info(INTEREST, "HIGH")
+	info(archive, "VAL")
+	info(alarm, "ATTOCUBE")
+	
+}
+
+record(ao, "$(P)ANGLE:SP")
+{
+    field(DESC, "Angle Set Point")
+    field(EGU, "deg")
+	field(PREC, "2")
+	field(DRVH, "170")
+	field(DRVL, "-170")
+	field(DTYP, "stream")
+	field(OUT, "@attocube.proto set_angle $(PORT)") 
+	field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:ANGLE:SP")
+	field(SDIS, "$(P)DISABLE")
+	field(UDFS, "NO_ALARM")
+	info(archive, "VAL")
+}
+
+record(ai, "$(P)ARK")
+{
+    field(DESC, "Ark")
+    field(EGU, "deg")
+	field(PREC, "2")	
+	field(SCAN, "1 second")
+	field(DTYP, "stream")
+	field(INP, "@attocube.proto get_ark $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:ARK")
+	field(SDIS, "$(P)DISABLE")
+	info(INTEREST, "HIGH")
+	info(archive, "VAL")
+	info(alarm, "ATTOCUBE")
+}
+
+record(ao, "$(P)ARK:SP")
+{
+    field(DESC, "Ark Set Point")
+    field(EGU, "deg")
+	field(PREC, "2")
+	field(DRVH, "19")
+	field(DRVL, "-19")
+	field(DTYP, "stream")
+	field(OUT, "@attocube.proto set_ark $(PORT)") 
+	field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:ARK:SP")
+	field(SDIS, "$(P)DISABLE")
+	field(UDFS, "NO_ALARM")
+	info(archive, "VAL")
+}
+
+record(bo, "$(P)INIT")
+{
+    field(DESC, "Initialisation commands")
+    field(PINI, "YES")
+    field(SCAN, "Passive")
+	field(DTYP, "stream")
+	field(OUT, "@attocube.proto initialise $(PORT)")
+	field(SDIS, "$(P)DISABLE")
+}
+
+record(bo, "$(P)STOP")
+{
+    field(DESC, "Stop commands")
+    field(PINI, "NO")
+    field(SCAN, "Passive")
+	field(DTYP, "stream")
+	field(OUT, "@attocube.proto stop $(PORT)")
+	field(SDIS, "$(P)DISABLE")
+}
+
+record(bi, "$(P)BUSY")
+{
+    field(DESC, "Busy")
+	field(SCAN, "1 second")
+	field(DTYP, "stream")
+	field(INP, "@attocube.proto get_busy $(PORT)")
+	field(ZNAM, "NOT BUSY")
+    field(ONAM, "BUSY")
+	field(SDIS, "$(P)DISABLE")
+}
+
+record(ao, "$(P)SIM:ANGLE") 
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:ANGLE","$(P)SIM:ANGLE:SP")
+
+record(ao, "$(P)SIM:ARK") 
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:ARK","$(P)SIM:ARK:SP")
