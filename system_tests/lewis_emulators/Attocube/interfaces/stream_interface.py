@@ -1,6 +1,6 @@
-from lewis.adapters.stream import StreamInterface
-from lewis.core.logging import has_log
-from lewis.utils.command_builder import CmdBuilder
+from lewis.adapters.stream import StreamInterface  #  type: ignore
+from lewis.core.logging import has_log  #  type: ignore
+from lewis.utils.command_builder import CmdBuilder  #  type: ignore
 
 
 @has_log

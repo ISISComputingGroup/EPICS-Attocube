@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-from lewis.devices import StateMachineDevice
+from lewis.devices import StateMachineDevice  #  type: ignore
 
 from .states import DefaultState
 
