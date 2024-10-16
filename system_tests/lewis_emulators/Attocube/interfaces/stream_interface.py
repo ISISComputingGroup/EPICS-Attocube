@@ -27,7 +27,7 @@ class AttocubeStreamInterface(StreamInterface):
             CmdBuilder(self.get_busy).escape("BUSY=").eos().build(),
         }
 
-    def handle_error(self, request, error) -> None:
+    def handle_error(self, request: str, error: str | Exception) -> None:
         """
         If command is not recognised print and error
 
