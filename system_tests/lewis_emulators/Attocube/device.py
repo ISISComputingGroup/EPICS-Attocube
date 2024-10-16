@@ -8,14 +8,14 @@ from .states import DefaultState
 class SimulatedAttocube(StateMachineDevice):
     def _initialize_data(self) -> None:
         # Ark
-        self.angle = 0
+        self.angle: float = 0
         # Angle as recieved by emulator, angle only set when go comand recieved
-        self._angle_val = None
+        self.angle_val: float | None = None
 
         # Angle
-        self.ark = 0
+        self.ark: float = 0
         # Ark as recieved by emulator, ark only set when go comand recieved
-        self._ark_val = None
+        self.ark_val: float | None = None
 
         # Initialisation and Stop comand recieved counters
         self.verbose_count = 0

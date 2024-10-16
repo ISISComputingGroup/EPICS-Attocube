@@ -1,6 +1,12 @@
+import typing
+import logging
+
 from lewis.adapters.stream import StreamInterface  #  type: ignore
 from lewis.core.logging import has_log  #  type: ignore
 from lewis.utils.command_builder import CmdBuilder  #  type: ignore
+
+if typing.TYPE_CHECKING:
+    from lewis_emulators.Attocube.device import SimulatedAttocube
 
 
 @has_log
@@ -11,6 +17,8 @@ class AttocubeStreamInterface(StreamInterface):
 
     def __init__(self) -> None:
         super(AttocubeStreamInterface, self).__init__()
+        self.device: "SimulatedAttocube"
+        self.log: "logging.Logger"
         # Commands that we expect via serial during normal operation
         self.commands = {
             CmdBuilder(self.get_angle).escape("ATANGLE=").eos().build(),
@@ -42,25 +50,25 @@ class AttocubeStreamInterface(StreamInterface):
         return f"{self.device.angle}"
 
     def set_angle_val(self, angle_sp: float) -> None:
-        self.device._angle_val = angle_sp
+        self.device.angle_val = angle_sp
 
     def set_angle_go(self) -> None:
-        if self.device._angle_val is None:
+        if self.device.angle_val is None:
             self.log.error("ATGO was recieved before angle had been set")
         else:
-            self.device.angle = self.device._angle_val
+            self.device.angle = self.device.angle_val
 
     def get_ark(self) -> str:
         return f"{self.device.ark}"
 
     def set_ark_val(self, ark_sp: float) -> None:
-        self.device._ark_val = ark_sp
+        self.device.ark_val = ark_sp
 
     def set_ark_go(self) -> None:
-        if self.device._ark_val is None:
+        if self.device.ark_val is None:
             self.log.error("ARGO was recieved before ark had been set")
         else:
-            self.device.ark = self.device._ark_val
+            self.device.ark = self.device.ark_val
 
     def count_verbose(self) -> None:
         self.device.verbose_count += 1
