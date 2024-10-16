@@ -1,5 +1,5 @@
-import typing
 import logging
+import typing
 
 from lewis.adapters.stream import StreamInterface  #  type: ignore
 from lewis.core.logging import has_log  #  type: ignore
