@@ -28,6 +28,11 @@ record(ai, "$(P)ANGLE")
 	field(INP, "@attocube.proto get_angle $(PORT)")
 	field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:ANGLE")
+	field(SDIS, "$(P)DISABLE")
+	info(INTEREST, "HIGH")
+	info(archive, "VAL")
+	info(alarm, "ATTOCUBE")
+	
 }
 
 record(ao, "$(P)ANGLE:SP")
@@ -41,6 +46,9 @@ record(ao, "$(P)ANGLE:SP")
 	field(OUT, "@attocube.proto set_angle $(PORT)") 
 	field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:ANGLE:SP")
+	field(SDIS, "$(P)DISABLE")
+	field(UDFS, "NO_ALARM")
+	info(archive, "VAL")
 }
 
 record(ai, "$(P)ARK")
@@ -53,6 +61,10 @@ record(ai, "$(P)ARK")
 	field(INP, "@attocube.proto get_ark $(PORT)")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:ARK")
+	field(SDIS, "$(P)DISABLE")
+	info(INTEREST, "HIGH")
+	info(archive, "VAL")
+	info(alarm, "ATTOCUBE")
 }
 
 record(ao, "$(P)ARK:SP")
@@ -66,6 +78,9 @@ record(ao, "$(P)ARK:SP")
 	field(OUT, "@attocube.proto set_ark $(PORT)") 
 	field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:ARK:SP")
+	field(SDIS, "$(P)DISABLE")
+	field(UDFS, "NO_ALARM")
+	info(archive, "VAL")
 }
 
 record(bo, "$(P)INIT")
@@ -75,6 +90,7 @@ record(bo, "$(P)INIT")
     field(SCAN, "Passive")
 	field(DTYP, "stream")
 	field(OUT, "@attocube.proto initialise $(PORT)")
+	field(SDIS, "$(P)DISABLE")
 }
 
 record(bo, "$(P)STOP")
@@ -84,6 +100,7 @@ record(bo, "$(P)STOP")
     field(SCAN, "Passive")
 	field(DTYP, "stream")
 	field(OUT, "@attocube.proto stop $(PORT)")
+	field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)BUSY")
@@ -94,6 +111,7 @@ record(bi, "$(P)BUSY")
 	field(INP, "@attocube.proto get_busy $(PORT)")
 	field(ZNAM, "NOT BUSY")
     field(ONAM, "BUSY")
+	field(SDIS, "$(P)DISABLE")
 }
 
 record(ao, "$(P)SIM:ANGLE") 
