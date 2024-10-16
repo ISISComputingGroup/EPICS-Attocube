@@ -9,7 +9,7 @@ class AttocubeStreamInterface(StreamInterface):
     out_terminator = "\r\n:"
     readtimeout = 100
 
-    def __init__(self):
+    def __init__(self) -> None:
         super(AttocubeStreamInterface, self).__init__()
         # Commands that we expect via serial during normal operation
         self.commands = {
@@ -27,7 +27,7 @@ class AttocubeStreamInterface(StreamInterface):
             CmdBuilder(self.get_busy).escape("BUSY=").eos().build(),
         }
 
-    def handle_error(self, request, error):
+    def handle_error(self, request, error) -> None:
         """
         If command is not recognised print and error
 
@@ -38,46 +38,46 @@ class AttocubeStreamInterface(StreamInterface):
         """
         self.log.error("An error occurred at request " + repr(request) + ": " + repr(error))
 
-    def get_angle(self):
+    def get_angle(self) -> str:
         return f"{self.device.angle}"
 
-    def set_angle_val(self, angle_sp):
+    def set_angle_val(self, angle_sp) -> None:
         self.device._angle_val = angle_sp
 
-    def set_angle_go(self):
+    def set_angle_go(self) -> None:
         if self.device._angle_val is None:
             self.log.error("ATGO was recieved before angle had been set")
         else:
             self.device.angle = self.device._angle_val
 
-    def get_ark(self):
+    def get_ark(self) -> str:
         return f"{self.device.ark}"
 
-    def set_ark_val(self, ark_sp):
+    def set_ark_val(self, ark_sp) -> None:
         self.device._ark_val = ark_sp
 
-    def set_ark_go(self):
+    def set_ark_go(self) -> None:
         if self.device._ark_val is None:
             self.log.error("ARGO was recieved before ark had been set")
         else:
             self.device.ark = self.device._ark_val
 
-    def count_verbose(self):
+    def count_verbose(self) -> None:
         self.device.verbose_count += 1
 
-    def count_ab0(self):
+    def count_ab0(self) -> None:
         self.device.ab0_count += 1
 
-    def count_mo(self):
+    def count_mo(self) -> None:
         self.device.mo_count += 1
 
-    def count_xq(self):
+    def count_xq(self) -> None:
         self.device.xq_count += 1
 
-    def count_mg(self):
+    def count_mg(self) -> None:
         self.device.mg_count += 1
 
-    def get_busy(self):
+    def get_busy(self) -> str:
         if self.device.busy:
             return "1.0000"
         else:

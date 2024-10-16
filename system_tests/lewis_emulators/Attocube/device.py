@@ -6,7 +6,7 @@ from .states import DefaultState
 
 
 class SimulatedAttocube(StateMachineDevice):
-    def _initialize_data(self):
+    def _initialize_data(self) -> None:
         # Ark
         self.angle = 0
         # Angle as recieved by emulator, angle only set when go comand recieved
@@ -27,13 +27,13 @@ class SimulatedAttocube(StateMachineDevice):
         # Busy
         self.busy = False
 
-    def _get_state_handlers(self):
+    def _get_state_handlers(self) -> dict:
         return {
             "default": DefaultState(),
         }
 
-    def _get_initial_state(self):
+    def _get_initial_state(self) -> str:
         return "default"
 
-    def _get_transition_handlers(self):
+    def _get_transition_handlers(self) -> dict:
         return OrderedDict([])
