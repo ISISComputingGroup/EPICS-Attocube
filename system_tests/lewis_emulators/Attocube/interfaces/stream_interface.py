@@ -41,7 +41,7 @@ class AttocubeStreamInterface(StreamInterface):
     def get_angle(self) -> str:
         return f"{self.device.angle}"
 
-    def set_angle_val(self, angle_sp) -> None:
+    def set_angle_val(self, angle_sp: float) -> None:
         self.device._angle_val = angle_sp
 
     def set_angle_go(self) -> None:
@@ -53,7 +53,7 @@ class AttocubeStreamInterface(StreamInterface):
     def get_ark(self) -> str:
         return f"{self.device.ark}"
 
-    def set_ark_val(self, ark_sp) -> None:
+    def set_ark_val(self, ark_sp: float) -> None:
         self.device._ark_val = ark_sp
 
     def set_ark_go(self) -> None:
